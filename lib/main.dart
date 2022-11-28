@@ -32,6 +32,16 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Widget> scoreKeeper = [
+    Icon(
+      Icons.check_rounded,
+      color: Color(0xffbdde8f),
+    ),
+    Icon(
+      Icons.close_rounded,
+      color: Colors.redAccent,
+    )
+  ];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -61,7 +71,17 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(20.0),
             child: NeoPopButton(
               color: Colors.green,
-              onTapUp: () => HapticFeedback.vibrate(),
+              onTapUp: () {
+                setState(() {
+                  scoreKeeper.add(
+                    Icon(
+                      Icons.check,
+                      color: Color(0xffbdde8f),
+                    ),
+                  );
+                });
+                HapticFeedback.vibrate();
+              },
               onTapDown: () => HapticFeedback.vibrate(),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
@@ -88,7 +108,17 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(20.0),
             child: NeoPopButton(
               color: Colors.redAccent,
-              onTapUp: () => HapticFeedback.vibrate(),
+              onTapUp: () {
+                setState(() {
+                  scoreKeeper.add(
+                    Icon(
+                      Icons.close_rounded,
+                      color: Colors.redAccent,
+                    ),
+                  );
+                });
+                HapticFeedback.vibrate();
+              },
               onTapDown: () => HapticFeedback.vibrate(),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
@@ -112,16 +142,7 @@ class _QuizPageState extends State<QuizPage> {
         ),
         //TODO: Add a Row here as your score keeper
         Row(
-          children: [
-            Icon(
-              Icons.check_rounded,
-              color: Color(0xffbdde8f),
-            ),
-            Icon(
-              Icons.close_rounded,
-              color: Colors.redAccent,
-            )
-          ],
+          children: scoreKeeper,
         ),
       ],
     );
@@ -169,4 +190,3 @@ class _QuizPageState extends State<QuizPage> {
 //     ),
 //   ),
 // ),
-// Cred's Neopop Button
