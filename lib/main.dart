@@ -33,28 +33,34 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [
-    Icon(
-      Icons.check_rounded,
-      color: Color(0xffbdde8f),
-    ),
-    Icon(
-      Icons.close_rounded,
-      color: Colors.redAccent,
-    )
+    // Icon(
+    //   Icons.check_rounded,
+    //   color: Color(0xffbdde8f),
+    // ),
+    // Icon(
+    //   Icons.close_rounded,
+    //   color: Colors.redAccent,
+    // )
   ];
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in feet.',
+    'A slug\'s blood is green.'
+  ];
+
+  int questionIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Expanded(
+        Expanded(
           flex: 5,
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                questions[questionIndex],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xffF0B666),
@@ -73,13 +79,15 @@ class _QuizPageState extends State<QuizPage> {
               color: Colors.green,
               onTapUp: () {
                 setState(() {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Color(0xffbdde8f),
-                    ),
-                  );
+                  questionIndex++;
+                  // scoreKeeper.add(
+                  //   Icon(
+                  //     Icons.check,
+                  //     color: Color(0xffbdde8f),
+                  //   ),
+                  // );
                 });
+
                 HapticFeedback.vibrate();
               },
               onTapDown: () => HapticFeedback.vibrate(),
@@ -110,12 +118,13 @@ class _QuizPageState extends State<QuizPage> {
               color: Colors.redAccent,
               onTapUp: () {
                 setState(() {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.close_rounded,
-                      color: Colors.redAccent,
-                    ),
-                  );
+                  questionIndex++;
+                  // scoreKeeper.add(
+                  //   Icon(
+                  //     Icons.close_rounded,
+                  //     color: Colors.redAccent,
+                  //   ),
+                  // );
                 });
                 HapticFeedback.vibrate();
               },
