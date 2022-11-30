@@ -48,7 +48,10 @@ class _QuizPageState extends State<QuizPage> {
     'A slug\'s blood is green.'
   ];
 
+  List<bool> answers = [false, true, true];
+
   int questionIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -78,14 +81,22 @@ class _QuizPageState extends State<QuizPage> {
             child: NeoPopButton(
               color: Colors.green,
               onTapUp: () {
+                bool correctAnswer = answers[questionIndex];
+
+                if (correctAnswer == true) {
+                  print('User chose right answer');
+                } else {
+                  print('User chose wrong answer');
+                }
+
                 setState(() {
                   questionIndex++;
-                  // scoreKeeper.add(
-                  //   Icon(
-                  //     Icons.check,
-                  //     color: Color(0xffbdde8f),
-                  //   ),
-                  // );
+                  scoreKeeper.add(
+                    Icon(
+                      Icons.check,
+                      color: Color(0xffbdde8f),
+                    ),
+                  );
                 });
 
                 HapticFeedback.vibrate();
@@ -117,14 +128,21 @@ class _QuizPageState extends State<QuizPage> {
             child: NeoPopButton(
               color: Colors.redAccent,
               onTapUp: () {
+                bool correctAnswer = answers[questionIndex];
+
+                if (correctAnswer == false) {
+                  print('User chose right answer');
+                } else {
+                  print('User chose wrong answer');
+                }
                 setState(() {
                   questionIndex++;
-                  // scoreKeeper.add(
-                  //   Icon(
-                  //     Icons.close_rounded,
-                  //     color: Colors.redAccent,
-                  //   ),
-                  // );
+                  scoreKeeper.add(
+                    Icon(
+                      Icons.close_rounded,
+                      color: Colors.redAccent,
+                    ),
+                  );
                 });
                 HapticFeedback.vibrate();
               },
