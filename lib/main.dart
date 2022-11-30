@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:neopop/neopop.dart';
+import './question.dart';
 
 void main() {
   runApp(
@@ -42,13 +43,27 @@ class _QuizPageState extends State<QuizPage> {
     //   color: Colors.redAccent,
     // )
   ];
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in feet.',
-    'A slug\'s blood is green.'
-  ];
+  // List<String> questions = [
+  //   'You can lead a cow down stairs but not up stairs.',
+  //   'Approximately one quarter of human bones are in feet.',
+  //   'A slug\'s blood is green.'
+  // ];
+  //
+  // List<bool> answers = [false, true, true];
+  //
+  // Question questioOne = Question(
+  //     question: 'You can lead a cow down stairs but not up stairs.',
+  //     answer: false);
 
-  List<bool> answers = [false, true, true];
+  List<Question> questionBank = [
+    Question(
+        question: 'You can lead a cow down stairs but not up stairs.',
+        answer: false),
+    Question(
+        question: 'Approximately one quarter of human bones are in feet.',
+        answer: true),
+    Question(question: 'A slug\'s blood is green.', answer: true)
+  ];
 
   int questionIndex = 0;
 
@@ -63,7 +78,8 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionIndex],
+                // questions[questionIndex],
+                questionBank[questionIndex].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xffF0B666),
@@ -81,7 +97,7 @@ class _QuizPageState extends State<QuizPage> {
             child: NeoPopButton(
               color: Colors.green,
               onTapUp: () {
-                bool correctAnswer = answers[questionIndex];
+                bool correctAnswer = questionBank[questionIndex].questionAnswer;
 
                 if (correctAnswer == true) {
                   print('User chose right answer');
@@ -128,7 +144,7 @@ class _QuizPageState extends State<QuizPage> {
             child: NeoPopButton(
               color: Colors.redAccent,
               onTapUp: () {
-                bool correctAnswer = answers[questionIndex];
+                bool correctAnswer = questionBank[questionIndex].questionAnswer;
 
                 if (correctAnswer == false) {
                   print('User chose right answer');
