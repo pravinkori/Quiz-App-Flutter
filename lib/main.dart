@@ -37,8 +37,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
 
-  int questionIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,7 +49,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 // questions[questionIndex],
-                quizBrain.questionBank[questionIndex].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xffF0B666),
@@ -69,8 +67,7 @@ class _QuizPageState extends State<QuizPage> {
             child: NeoPopButton(
               color: Colors.green,
               onTapUp: () {
-                bool correctAnswer =
-                    quizBrain.questionBank[questionIndex].questionAnswer;
+                bool correctAnswer = quizBrain.getCorrectAnswer();
 
                 if (correctAnswer == true) {
                   print('User chose right answer');
@@ -79,7 +76,7 @@ class _QuizPageState extends State<QuizPage> {
                 }
 
                 setState(() {
-                  questionIndex++;
+                  quizBrain.nextQuestion();
                   scoreKeeper.add(
                     Icon(
                       Icons.check,
@@ -117,8 +114,7 @@ class _QuizPageState extends State<QuizPage> {
             child: NeoPopButton(
               color: Colors.redAccent,
               onTapUp: () {
-                bool correctAnswer =
-                    quizBrain.questionBank[questionIndex].questionAnswer;
+                bool correctAnswer = quizBrain.getCorrectAnswer();
 
                 if (correctAnswer == false) {
                   print('User chose right answer');
@@ -126,7 +122,7 @@ class _QuizPageState extends State<QuizPage> {
                   print('User chose wrong answer');
                 }
                 setState(() {
-                  questionIndex++;
+                  quizBrain.nextQuestion();
                   scoreKeeper.add(
                     Icon(
                       Icons.close_rounded,
