@@ -3,7 +3,7 @@ import './question.dart';
 class QuizBrain {
   int _questionIndex = 0;
 
-  List<Question> _questionBank = [
+  final List<Question> _questionBank = [
     Question(
         question: 'Some cats are actually allergic to humans', answer: true),
     Question(
@@ -59,5 +59,18 @@ class QuizBrain {
 
   bool getCorrectAnswer() {
     return _questionBank[_questionIndex].questionAnswer;
+  }
+
+  bool isFinished() {
+    if (_questionIndex >= _questionBank.length - 1) {
+      print('return true');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void reset() {
+    _questionIndex = 0;
   }
 }
