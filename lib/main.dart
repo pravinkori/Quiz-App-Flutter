@@ -51,7 +51,7 @@ class _QuizPageState extends State<QuizPage> {
             Icons.close_rounded,
           ),
           style: AlertStyle(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.green,
             titleStyle: TextStyle(
               color: Colors.black,
               fontFamily: 'Poppins',
@@ -70,14 +70,14 @@ class _QuizPageState extends State<QuizPage> {
               borderRadius: BorderRadius.circular(0.0),
             ),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          image: Image.asset('images/success.png'),
           buttons: [
             DialogButton(
-              color: Colors.white,
+              color: Colors.green,
               radius: BorderRadius.zero,
               onPressed: () => null,
               child: NeoPopButton(
-                color: Colors.green,
+                color: Colors.white,
                 onTapUp: () {
                   Navigator.pop(context);
                   HapticFeedback.vibrate();
@@ -117,7 +117,6 @@ class _QuizPageState extends State<QuizPage> {
               color: Color(0xffbdde8f),
             ),
           );
-          print('User chose right answer');
         } else {
           scoreKeeper.add(
             const Icon(
@@ -125,7 +124,6 @@ class _QuizPageState extends State<QuizPage> {
               color: Colors.redAccent,
             ),
           );
-          print('User chose wrong answer');
         }
 
         quizBrain.nextQuestion();
